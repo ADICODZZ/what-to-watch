@@ -8,7 +8,7 @@ export interface MovieTitleSuggestion {
   year: number;
 }
 
-const API_KEY ='';
+const API_KEY = 'AIzaSyAiHRKTElZSZjrRA80audcZw5nZpbC_fDM';
 
 if (!API_KEY) {
   console.error("API_KEY is not set in environment variables. Movie recommendations will not work.");
