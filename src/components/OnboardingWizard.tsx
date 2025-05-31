@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { StableUserPreferences } from '../types';
-import { MOVIE_FREQUENCIES, ACTOR_DIRECTOR_PREFERENCES, MOVIE_LANGUAGES, OTT_PLATFORMS, MOVIE_ERAS, MOVIE_DURATIONS, ICONS, CINE_SUGGEST_STABLE_PREFERENCES_KEY, CINE_SUGGEST_ONBOARDING_COMPLETE_KEY } from '../constants';
+import type { StableUserPreferences } from '../../types';
+import { MOVIE_FREQUENCIES, ACTOR_DIRECTOR_PREFERENCES, MOVIE_LANGUAGES, OTT_PLATFORMS, MOVIE_ERAS, MOVIE_DURATIONS, ICONS, CINE_SUGGEST_STABLE_PREFERENCES_KEY, CINE_SUGGEST_ONBOARDING_COMPLETE_KEY } from '../../constants';
 
 interface OnboardingWizardProps {
   onComplete: (preferences: StableUserPreferences) => void;

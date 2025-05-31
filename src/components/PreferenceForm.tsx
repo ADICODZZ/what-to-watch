@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import type { SessionPreferences } from '../types';
-import { MOVIE_GENRES, ICONS } from '../constants';
+import type { SessionPreferences } from '../../types';
+import { MOVIE_GENRES, ICONS } from '../../constants';
 
 interface PreferenceFormProps {
   onSubmit: (preferences: SessionPreferences) => void;

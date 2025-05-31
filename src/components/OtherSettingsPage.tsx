@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { AppSettings } from '../types';
-import { CINE_SUGGEST_APP_SETTINGS_KEY } from '../constants';
+import type { AppSettings } from '../../types';
+import { CINE_SUGGEST_APP_SETTINGS_KEY } from '../../constants';
 
 interface OtherSettingsPageProps {
   onBackToMain: () => void;

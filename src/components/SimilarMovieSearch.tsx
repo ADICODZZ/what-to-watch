@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { POPULAR_MOVIES_FOR_SUGGESTION } from '../constants';
+import { POPULAR_MOVIES_FOR_SUGGESTION } from '../../constants';
 import { getMovieTitleSuggestions, MovieTitleSuggestion } from '../services/geminiService'; // Import new service and type
 
 interface SimilarMovieSearchProps {

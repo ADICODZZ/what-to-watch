@@ -1,18 +1,17 @@
 
 import { GoogleGenAI } from "@google/genai";
-import type { UserPreferences, Movie, GeminiMovieRecommendation, AppSettings, MovieFeedback as AppMovieFeedbackType } from '../types'; // Added AppMovieFeedbackType
-import { MOVIE_LANGUAGES, MOVIE_ERAS, MOVIE_DURATIONS, CINE_SUGGEST_MOVIE_FEEDBACK_KEY, CINE_SUGGEST_APP_SETTINGS_KEY } from '../constants';
+import type { UserPreferences, Movie, GeminiMovieRecommendation, AppSettings, MovieFeedback as AppMovieFeedbackType } from '../../types'; // Added AppMovieFeedbackType
+import { MOVIE_LANGUAGES, MOVIE_ERAS, MOVIE_DURATIONS, CINE_SUGGEST_MOVIE_FEEDBACK_KEY, CINE_SUGGEST_APP_SETTINGS_KEY } from '../../constants';
 
 export interface MovieTitleSuggestion {
   title: string;
   year: number;
 }
 
-// For Vite, environment variables prefixed with VITE_ are exposed to client-side code via import.meta.env
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY ='';
 
 if (!API_KEY) {
-  console.error("VITE_API_KEY is not set. Movie recommendations will not work. Ensure it is set in your .env file for local development or as an environment variable in your hosting provider.");
+  console.error("API_KEY is not set in environment variables. Movie recommendations will not work.");
 }
 
 const ai = new GoogleGenAI({ apiKey: API_KEY! }); 
@@ -216,7 +215,7 @@ const parseAndTransformMovies = (jsonStr: string): Movie[] => {
 
 export const getMovieRecommendations = async (preferences: UserPreferences): Promise<Movie[]> => {
   if (!API_KEY) {
-    throw new Error("Gemini API Key is not configured. Please set the VITE_API_KEY environment variable.");
+    throw new Error("Gemini API Key is not configured. Please set the API_KEY environment variable.");
   }
   
   const prompt = constructPrompt(preferences);
@@ -254,9 +253,8 @@ export const getMovieRecommendations = async (preferences: UserPreferences): Pro
   } catch (error) {
     console.error("Error fetching recommendations from Gemini:", error);
     if (error instanceof Error) {
-        // Fix: Safely access error.cause for more specific API key error checking
-        if (error.message.includes("API_KEY_INVALID") || (error as any).cause?.message?.includes("API_KEY_INVALID")) {
-            throw new Error("Invalid Gemini API Key. Please check your VITE_API_KEY environment variable.");
+        if (error.message.includes("API_KEY_INVALID")) {
+            throw new Error("Invalid Gemini API Key. Please check your API_KEY environment variable.");
         }
         if (error.message.includes("Candidate was blocked due to SAFETY")) {
             throw new Error("The request was blocked due to safety concerns. Please try modifying your preferences.");
@@ -301,7 +299,7 @@ EXTREMELY IMPORTANT INSTRUCTIONS FOR JSON OUTPUT:
 
 export const findSimilarMovieByName = async (movieTitle: string): Promise<Movie | null> => {
   if (!API_KEY) {
-    throw new Error("Gemini API Key is not configured. Please set VITE_API_KEY.");
+    throw new Error("Gemini API Key is not configured.");
   }
   if (!movieTitle.trim()) {
     return null; 
@@ -318,7 +316,7 @@ export const findSimilarMovieByName = async (movieTitle: string): Promise<Movie 
         temperature: 0.3, 
         topP: 0.9,
         topK: 30,
-        thinkingConfig: { thinkingBudget: 0 } 
+        thinkingConfig: { thinkingBudget: 0 } // Added for potential speed up
       }
     });
 
@@ -409,7 +407,7 @@ EXTREMELY IMPORTANT INSTRUCTIONS FOR JSON OUTPUT:
         temperature: 0.2, 
         topP: 0.8,
         topK: 10,
-        thinkingConfig: { thinkingBudget: 0 } 
+        thinkingConfig: { thinkingBudget: 0 } // Added to potentially speed up response
       }
     });
 
@@ -501,7 +499,7 @@ export const getMoreSimilarMovies = async (
   idToFilterOut: string | undefined
 ): Promise<Movie[]> => {
   if (!API_KEY) {
-    throw new Error("Gemini API Key is not configured. Set VITE_API_KEY.");
+    throw new Error("Gemini API Key is not configured.");
   }
 
   const prompt = constructMoreSimilarMoviesPrompt(promptQueryTitle, promptQueryYear);
@@ -515,6 +513,8 @@ export const getMoreSimilarMovies = async (
         temperature: 0.6, 
         topP: 0.95,
         topK: 40,
+        // Not adding thinkingBudget: 0 here for 'getMoreSimilarMovies', 
+        // as quality of these suggestions is important.
       }
     });
 
@@ -533,9 +533,8 @@ export const getMoreSimilarMovies = async (
   } catch (error) {
     console.error("Error fetching more similar movies from Gemini:", error);
      if (error instanceof Error) {
-        // Fix: Safely access error.cause for more specific API key error checking
-        if (error.message.includes("API_KEY_INVALID") || (error as any).cause?.message?.includes("API_KEY_INVALID")) {
-            throw new Error("Invalid Gemini API Key. Please check VITE_API_KEY.");
+        if (error.message.includes("API_KEY_INVALID")) {
+            throw new Error("Invalid Gemini API Key.");
         }
         if (error.message.includes("Candidate was blocked due to SAFETY")) {
             throw new Error("The request for more similar movies was blocked due to safety concerns.");

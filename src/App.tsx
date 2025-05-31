@@ -1,21 +1,21 @@
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { Header } from './src/components/Header';
-import { PreferenceForm } from './src/components/PreferenceForm';
-import { MovieList } from './src/components/MovieList';
-import { LoadingSpinner } from './src/components/LoadingSpinner';
-import { Footer } from './src/components/Footer';
-import { getMovieRecommendations, findSimilarMovieByName, getMoreSimilarMovies } from './src/services/geminiService';
+import { Header } from './components/Header';
+import { PreferenceForm } from './components/PreferenceForm';
+import { MovieList } from './components/MovieList';
+import { LoadingSpinner } from './components/LoadingSpinner';
+import { Footer } from './components/Footer';
+import { getMovieRecommendations, findSimilarMovieByName, getMoreSimilarMovies } from './services/geminiService';
 import type { UserPreferences, Movie, SessionPreferences, StableUserPreferences, ActiveTab, CurrentAppView } from './types';
-import { WelcomeMessage } from './src/components/WelcomeMessage';
-import { SimilarMovieSearch } from './src/components/SimilarMovieSearch';
-import { MovieCard } from './src/components/MovieCard';
-import { OnboardingWizard } from './src/components/OnboardingWizard';
-import { DiscoveryView } from './src/components/DiscoveryView';
-import { MyAccountPage } from './src/components/MyAccountPage';
-import { OtherSettingsPage } from './src/components/OtherSettingsPage';
+import { WelcomeMessage } from './components/WelcomeMessage';
+import { SimilarMovieSearch } from './components/SimilarMovieSearch';
+import { MovieCard } from './components/MovieCard';
+import { OnboardingWizard } from './components/OnboardingWizard';
+import { DiscoveryView } from './components/DiscoveryView';
+import { MyAccountPage } from './components/MyAccountPage';
+import { OtherSettingsPage } from './components/OtherSettingsPage';
 import { CINE_SUGGEST_ONBOARDING_COMPLETE_KEY, CINE_SUGGEST_STABLE_PREFERENCES_KEY, MOVIE_FREQUENCIES, ACTOR_DIRECTOR_PREFERENCES, MOVIE_LANGUAGES, MOVIE_ERAS, MOVIE_DURATIONS, ICONS } from './constants';
-import { saveMovieFeedback } from './src/services/feedbackService';
+import { saveMovieFeedback } from './services/feedbackService';
 
 
 const getDefaultStablePreferences = (): StableUserPreferences => {

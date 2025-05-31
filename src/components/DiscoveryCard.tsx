@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { Movie } from '../types';
-import { ICONS } from '../constants';
+import type { Movie } from '../../types';
+import { ICONS } from '../../constants';
 
 const genericFallbackImageUrl = 'https://picsum.photos/seed/fallbackcard/400/600?grayscale&blur=2';
 

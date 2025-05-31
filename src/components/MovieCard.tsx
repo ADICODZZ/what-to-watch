@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { Movie, MovieFeedback } from '../types';
-import { ICONS } from '../constants';
+import type { Movie, MovieFeedback } from '../../types';
+import { ICONS } from '../../constants';
 import { saveMovieFeedback, getMovieFeedback } from '../services/feedbackService'; // Updated import
 
 interface MovieCardProps {

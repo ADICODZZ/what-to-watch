@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ICONS } from '../constants'; // Assuming ICONS might be used for dropdown items
+import { ICONS } from '../../constants'; // Assuming ICONS might be used for dropdown items
 
 interface HeaderProps {
   onEditPreferences: () => void;

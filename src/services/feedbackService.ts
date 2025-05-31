@@ -1,5 +1,5 @@
-import { CINE_SUGGEST_MOVIE_FEEDBACK_KEY } from '../constants';
-import type { MovieFeedback } from '../types';
+import { CINE_SUGGEST_MOVIE_FEEDBACK_KEY } from '../../constants';
+import type { MovieFeedback } from '../../types';
 
 export const saveMovieFeedback = (title: string, year: number, feedbackType: 'Loved it!' | 'Liked it' | 'Not my vibe'): void => {
   const movieFeedbackId = `${title.toLowerCase().replace(/[^a-z0-9]/g, '')}${year}`;

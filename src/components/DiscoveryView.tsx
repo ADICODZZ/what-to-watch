@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { POPULAR_MOVIES_FOR_SUGGESTION, ICONS } from '../constants';
-import type { Movie } from '../types';
+import { POPULAR_MOVIES_FOR_SUGGESTION, ICONS } from '../../constants';
+import type { Movie } from '../../types';
 import { saveMovieFeedback, getAllFeedback } from '../services/feedbackService';
 import { DiscoveryCard } from './DiscoveryCard';
 
